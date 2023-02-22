@@ -106,6 +106,19 @@ export class Web3Service {
         return contributors
     }
 
+    public async getContribution(id, contributor): Promise<string> {
+        this._provider = window.ethereum
+        this._web3js = new Web3(this._provider)
+        let accountArray = await this.getAccounts()
+
+        this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
+        const contribution = await this._contract
+            .methods.getContributorsBalance(id, contributor)
+            .call({ from: accountArray[0] })
+        
+        return contribution
+    }
+
     public async getBeneficiary(id): Promise<string> {
 
         this._provider = window.ethereum

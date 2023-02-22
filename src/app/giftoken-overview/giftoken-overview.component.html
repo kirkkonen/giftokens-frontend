@@ -1,3 +1,7 @@
+<div class="toolbar" role="banner">
+  <h1>Giftoken #{{tokenID}}</h1>
+</div>
+
 <div *ngIf="(displayedAccount | async); else displayButton; let account"> 
     
     {{account}} 
@@ -18,39 +22,36 @@
     </li>
     <br>
 
-    <form [formGroup]="form" (ngSubmit)="addFunds()">
-  
-      <mat-form-field appearance="outline">
-          <mat-label>Amount to add</mat-label>
-          <input 
-          matInput 
-          [formControl]="form.controls.prompt" 
-          placeholder="100" 
-          #description
-          (keyup.enter)="addFunds()">
-      </mat-form-field>
-
-      <div mat-dialog-actions>
+    <div *ngIf="isBeneficiary | async else notBeneficiary">
       <button
-          mat-raised-button color="primary"
-          type="submit">
-          Add tokens
-      </button>
-      </div>
-      <br>
+      mat-raised-button color="primary"
+      (click)="claimGifts()">
+      Claim gifts
+    </button>
+    </div>
 
-      <!-- <div *ngIf="beneficiary._buffer[0] == connectedAccount._buffer[0] | async"> -->
-
-      <div *ngIf="isBeneficiary | async">
-        <button
-        mat-raised-button color="primary"
-        (click)="claimGifts()">
-        Claim gifts
-      </button>
-      </div>
-
+    <ng-template #notBeneficiary>
+      <form [formGroup]="form" (ngSubmit)="addFunds()">
+        <mat-form-field appearance="outline">
+            <mat-label>Amount to add</mat-label>
+            <input 
+            matInput 
+            [formControl]="form.controls.prompt" 
+            placeholder="100" 
+            #description
+            (keyup.enter)="addFunds()">
+        </mat-form-field>
   
-    </form>
+        <div mat-dialog-actions>
+        <button
+            mat-raised-button color="primary"
+            type="submit">
+            Add tokens
+        </button>
+        </div>
+        <br>
+      </form>
+    </ng-template>
 
 </div>
 

@@ -67,6 +67,11 @@ export class GiftokenOverviewComponent implements OnInit {
     this.contributors = await this.web3.getContributors(this.tokenID)
     console.log('contributors: ', this.contributors)
 
+    for (const contributor of this.contributors) {
+      let contribution = await this.web3.getContribution(this.tokenID, contributor)
+      console.log(`contribution of ${contributor}: `, contribution)
+    }
+
     let _beneficiary = await this.web3.getBeneficiary(this.tokenID)
     this.beneficiary.next(_beneficiary)
     console.log('beneficiary in overview component: ', this.beneficiary)
