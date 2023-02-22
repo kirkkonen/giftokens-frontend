@@ -1,0 +1,27 @@
+<br>
+<br>
+
+  <form [formGroup]="form" (ngSubmit)="mintNFT()">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Receiver address</mat-label>
+        <input 
+        matInput 
+        [formControl]="form.controls.prompt" 
+        placeholder="0x..." 
+        #description
+        (keyup.enter)="mintNFT()">
+    </mat-form-field>
+    
+    <div mat-dialog-actions>
+    <button
+        mat-raised-button color="primary"
+        type="submit">
+        Create Giftoken
+    </button>
+    </div>
+
+</form>
+
+
+<br>

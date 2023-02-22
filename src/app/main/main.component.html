@@ -1,0 +1,57 @@
+<div class="toolbar" role="banner">
+    <h1>Web3 Gifts</h1>
+  </div>
+  
+  <div *ngIf="(displayedAccount | async); else displayButton; let account"> {{account}} </div>
+  <ng-template #displayButton>
+    <button (click)= "openMetaMask()">
+      Connect Wallet
+    </button>
+  </ng-template>
+  
+  <div>
+    <app-image-generator (prompted) = "prompted($event)"></app-image-generator>
+  
+    <br>
+  
+    <p *ngIf="prompt$ | async as prompt"> Generating image for the request {{prompt}}... </p>
+  
+    <app-gallery [images] = "$any(images$ | async)"></app-gallery>
+    
+    <br>
+  
+    <!-- <button (click)="sendImage()">
+      Send to IPFS
+    </button> -->
+  
+    <br>
+  
+    <form [formGroup]="form" (ngSubmit)="mintNFT()">
+  
+      <mat-form-field appearance="outline">
+          <mat-label>Receiver address</mat-label>
+          <input 
+          matInput 
+          [formControl]="form.controls.prompt" 
+          placeholder="0x..." 
+          #description
+          (keyup.enter)="mintNFT()">
+      </mat-form-field>
+      
+      <div mat-dialog-actions>
+      <button
+          mat-raised-button color="primary"
+          type="submit">
+          Create Giftoken
+      </button>
+      </div>
+  
+    </form>
+  
+    <p *ngIf="tokenID | async">
+      Giftoken was minted successfully! Please proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview</a>  
+    </p>
+
+  <!-- 
+    <app-contract-caller></app-contract-caller> -->
+  </div>

@@ -1,0 +1,63 @@
+<div *ngIf="(displayedAccount | async); else displayButton; let account"> 
+    
+    {{account}} 
+    <br>
+    <br>
+    <p>If you don't see the token details yet, please wait 30-60 seconds until the minting process is over and reload page</p>
+
+    <img [src]="nftImage">
+
+    <br>
+    <br>
+    <p>Beneficiary:</p>
+    <p>{{beneficiary | async}}</p>
+    <br>
+    <p>Contributors:</p>
+    <li *ngFor="let contributor of contributors">
+       {{contributor}}
+    </li>
+    <br>
+
+    <form [formGroup]="form" (ngSubmit)="addFunds()">
+  
+      <mat-form-field appearance="outline">
+          <mat-label>Amount to add</mat-label>
+          <input 
+          matInput 
+          [formControl]="form.controls.prompt" 
+          placeholder="100" 
+          #description
+          (keyup.enter)="addFunds()">
+      </mat-form-field>
+
+      <div mat-dialog-actions>
+      <button
+          mat-raised-button color="primary"
+          type="submit">
+          Add tokens
+      </button>
+      </div>
+      <br>
+
+      <!-- <div *ngIf="beneficiary._buffer[0] == connectedAccount._buffer[0] | async"> -->
+
+      <div *ngIf="isBeneficiary | async">
+        <button
+        mat-raised-button color="primary"
+        (click)="claimGifts()">
+        Claim gifts
+      </button>
+      </div>
+
+  
+    </form>
+
+</div>
+
+<ng-template #displayButton>
+  <button (click)= "openMetaMask()">
+    Connect Wallet
+  </button>
+</ng-template>
+
+
