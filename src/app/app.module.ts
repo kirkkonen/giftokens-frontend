@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,6 +33,7 @@ import { OverviewGalleryComponent } from './overview-gallery/overview-gallery.co
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatTableModule,
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule

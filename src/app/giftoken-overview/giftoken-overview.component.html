@@ -7,18 +7,21 @@
     {{account}} 
     <br>
     <br>
-    <p>If you don't see the token details yet, please wait 30-60 seconds until the minting process is over and reload page</p>
+    <!-- <p>If you don't see the token details yet, please wait 30-60 seconds until the minting process is over and reload page</p> -->
 
     <img [src]="nftImage">
 
     <br>
     <br>
-    <p>Beneficiary:</p>
+    <p>Giftee:</p>
     <p>{{beneficiary | async}}</p>
     <br>
-    <p>Contributors:</p>
-    <li *ngFor="let contributor of contributors">
-       {{contributor}}
+    <p>Сontributors:</p>
+    <li *ngFor="let contribution of contributions">
+      <a 
+      [href]="'https://goerli.etherscan.io/address/' + contribution.contributor"
+      target="blank"> 
+        {{contribution.shortContributor}}</a> added {{contribution.contribution}} ETH
     </li>
     <br>
 
@@ -29,8 +32,10 @@
       Claim gifts
     </button>
     </div>
-
+    <br>
+    
     <ng-template #notBeneficiary>
+      <p>Add your contribution:</p>
       <form [formGroup]="form" (ngSubmit)="addFunds()">
         <mat-form-field appearance="outline">
             <mat-label>Amount to add</mat-label>

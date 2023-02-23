@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Web3Service } from '../services/web3.service';
-import { Observable, ReplaySubject, Subject, combineLatest, map, of, shareReplay, switchMap, tap } from 'rxjs';
+import { Observable, ReplaySubject, Subject, combineLatest, map, of, shareReplay, switchMap, tap, throwIfEmpty } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Contribution } from '../models/contribution';
 
 @Component({
   selector: 'app-giftoken-overview',
@@ -22,6 +23,8 @@ export class GiftokenOverviewComponent implements OnInit {
   isBeneficiary: Observable<boolean> = combineLatest([this.beneficiary, this.connectedAccount]).pipe(
     map(([beneficiary, account]) => beneficiary.toLowerCase() === account.toLowerCase())
   )
+  contributions: Contribution[] = []
+
 
   async checkAccounts(){
     let addresses = await this.web3.getAccounts()
@@ -67,10 +70,18 @@ export class GiftokenOverviewComponent implements OnInit {
     this.contributors = await this.web3.getContributors(this.tokenID)
     console.log('contributors: ', this.contributors)
 
-    for (const contributor of this.contributors) {
-      let contribution = await this.web3.getContribution(this.tokenID, contributor)
-      console.log(`contribution of ${contributor}: `, contribution)
+    for (const c of this.contributors) {
+      var contrObj = {contributor: '', contribution: '', shortContributor: ''}
+      contrObj.contributor = c
+      contrObj.shortContributor = c.slice(0,4).concat('...', c.slice(-4))
+      let contr = await this.web3.getContribution(this.tokenID, c)
+      let convertedContr = parseInt(contr)/1e18
+      contrObj.contribution = convertedContr.toString()
+      this.contributions.push(contrObj)
+      console.log(`contribution of ${c}: `, contr)
     }
+
+    console.log('contributions: ', this.contributions)
 
     let _beneficiary = await this.web3.getBeneficiary(this.tokenID)
     this.beneficiary.next(_beneficiary)
