@@ -5,6 +5,7 @@ import { Observable, ReplaySubject, Subject, combineLatest, map, of, shareReplay
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Contribution } from '../models/contribution';
+import { contractAddress } from '../../abis.js'
 
 @Component({
   selector: 'app-giftoken-overview',
@@ -13,12 +14,16 @@ import { Contribution } from '../models/contribution';
 })
 export class GiftokenOverviewComponent implements OnInit {
 
+  contractAddress: string = contractAddress
+  shortAddress: string = contractAddress.slice(0,4).concat('...', contractAddress.slice(-4))
   tokenID: number
   nftMetadata: any
   nftImage: any
   displayedAccount: Subject<string> = new ReplaySubject(1)
   contributors: any
   beneficiary: Subject<string> = new ReplaySubject(1)
+  shortBeneficiary: Subject<string> = new ReplaySubject(1)
+  beneficiaryString: string
   connectedAccount: Subject<string> = new ReplaySubject(1)
   isBeneficiary: Observable<boolean> = combineLatest([this.beneficiary, this.connectedAccount]).pipe(
     map(([beneficiary, account]) => beneficiary.toLowerCase() === account.toLowerCase())
@@ -84,7 +89,10 @@ export class GiftokenOverviewComponent implements OnInit {
     console.log('contributions: ', this.contributions)
 
     let _beneficiary = await this.web3.getBeneficiary(this.tokenID)
+    this.beneficiaryString = _beneficiary
+    let _shortBeneficiary = _beneficiary.slice(0,4).concat('...', _beneficiary.slice(-4))
     this.beneficiary.next(_beneficiary)
+    this.shortBeneficiary.next(_shortBeneficiary)
     console.log('beneficiary in overview component: ', this.beneficiary)
     console.log('connected account in ovewview component: ', this.connectedAccount)
 

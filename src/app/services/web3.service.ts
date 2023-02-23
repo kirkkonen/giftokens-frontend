@@ -14,7 +14,7 @@ export class Web3Service {
     private _provider: any
     private _web3js: any
     private _contract: any
-    private _contractAddress: string = contractAddress
+    public _contractAddress: string = contractAddress
 
     constructor() { 
     }

@@ -13,8 +13,25 @@
 
     <br>
     <br>
-    <p>Giftee:</p>
-    <p>{{beneficiary | async}}</p>
+
+    <p *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Congratulations! This Giftoken is for you :)</p>
+
+    <ng-template #notBeneficiaryGiftee>
+      <p>Giftee: 
+        <a [href]="'https://goerli.etherscan.io/address/' + beneficiaryString"
+        target="blank">
+          {{shortBeneficiary | async}}
+        </a>
+      </p>
+    </ng-template>
+
+    <p>Contract: 
+      <a [href]="'https://goerli.etherscan.io/address/' + contractAddress"
+      target="blank">
+        {{shortAddress}}
+      </a>
+    </p>
+
     <br>
     <p>Сontributors:</p>
     <li *ngFor="let contribution of contributions">
@@ -25,7 +42,7 @@
     </li>
     <br>
 
-    <div *ngIf="isBeneficiary | async else notBeneficiary">
+    <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
       <button
       mat-raised-button color="primary"
       (click)="claimGifts()">
@@ -34,7 +51,7 @@
     </div>
     <br>
     
-    <ng-template #notBeneficiary>
+    <ng-template #notBeneficiaryAdd>
       <p>Add your contribution:</p>
       <form [formGroup]="form" (ngSubmit)="addFunds()">
         <mat-form-field appearance="outline">
