@@ -1,0 +1,114 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+
+
+$dark-purple-palette: (
+  50: #fff7ff,
+  100: #fcf2ff,
+  200: #f7edff,
+  300: #ede2ff,
+  400: #cac0dd,
+  500: #aca2be,
+  600: #827993,
+  700: #6d647e,
+  800: #4d455d,
+  900: #2a2439,
+  A100: #c2e4ff,
+  A200: #addcff,
+  A400: #1f9eff,
+  A700: #00518f,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$tealish-palette: (
+    50: #dfeded,
+    100: #afd4d3,
+    200: #7db9b6,
+    300: #4b9e9a,
+    400: #238c86,
+    500: #007971,
+    600: #006d65,
+    700: #005e56,
+    800: #004f48,
+    900: #00352d,
+    A100: #c2e4ff,
+    A200: #addcff,
+    A400: #1f9eff,
+    A700: #00518f,
+    contrast: (
+      50: rgba(black, 0.87),
+      100: rgba(black, 0.87),
+      200: rgba(black, 0.87),
+      300: rgba(black, 0.87),
+      400: rgba(black, 0.87),
+      500: white,
+      600: white,
+      700: white,
+      800: white,
+      900: white,
+      A100: rgba(black, 0.87),
+      A200: rgba(black, 0.87),
+      A400: white,
+      A700: white,
+    )
+  ); 
+
+
+
+
+$crimson-palette: (
+  50: #ffe9ef,
+  100: #ffc9d5,
+  200: #f1919e,
+  300: #e96478,
+  400: #f53558,
+  500: #fb013f,
+  600: #eb003e,
+  700: #d90037,
+  800: #cc0030,
+  900: #bd0024,
+  A100: #c2e4ff,
+  A200: #addcff,
+  A400: #1f9eff,
+  A700: #00518f,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+
+$my-app-primary: mat-palette($dark-purple-palette, 800);
+$my-app-accent:  mat-palette($tealish-palette, 200);
+$my-app-warn:    mat-palette($crimson-palette, 300);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);

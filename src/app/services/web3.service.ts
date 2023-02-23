@@ -144,5 +144,18 @@ export class Web3Service {
             .send({ from: accountArray[0] })
 
     }
+
+    public async getBalance(id): Promise<string> {
+
+        this._provider = window.ethereum
+        this._web3js = new Web3(this._provider)
+        let accountArray = await this.getAccounts()
+
+        this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
+        const beneficiary = await this._contract
+            .methods.getBeneficiary(id)
+            .call({ from: accountArray[0] })    
+        return beneficiary
+    }
     
 }

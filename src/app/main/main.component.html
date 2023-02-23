@@ -1,13 +1,26 @@
-<div class="toolbar" role="banner">
+<!-- <div class="toolbar" role="banner">
     <h1>Create a giftoken</h1>
-</div>
-  
-  <div *ngIf="(displayedAccount | async); else displayButton; let account"> {{account}} </div>
+</div> -->
+
+<mat-toolbar color="primary">
+  <img src="../../assets/logo.png" class="logo">
+  <h1>Giftokens</h1>
+  <span class="spacer"></span>
+  <span class="mid-text" *ngIf="(displayedAccount | async); else displayButton; let account"> 
+    <span class="green-dot">●</span>  
+    {{account}} 
+  </span>
   <ng-template #displayButton>
-    <button (click)= "openMetaMask()">
+    <button 
+    mat-raised-button color="accent"
+    (click)= "openMetaMask()">
       Connect Wallet
     </button>
   </ng-template>
+
+</mat-toolbar>
+  
+
   
   <div>
     <app-image-generator (prompted) = "prompted($event)"></app-image-generator>
@@ -19,10 +32,7 @@
     <app-gallery [images] = "$any(images$ | async)"></app-gallery>
     
     <br>
-  
-    <!-- <button (click)="sendImage()">
-      Send to IPFS
-    </button> -->
+
   
     <br>
   
@@ -40,7 +50,7 @@
       
       <div mat-dialog-actions>
       <button
-          mat-raised-button color="primary"
+          mat-raised-button color="accent"
           type="submit">
           Create Giftoken
       </button>

@@ -5,12 +5,10 @@
 <div *ngIf="(displayedAccount | async); else displayButton; let account"> 
     
     {{account}} 
+    
     <br>
     <br>
-    <!-- <p>If you don't see the token details yet, please wait 30-60 seconds until the minting process is over and reload page</p> -->
-
     <img [src]="nftImage">
-
     <br>
     <br>
 
