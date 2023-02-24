@@ -24,6 +24,20 @@ body {
 
 .mid-text {
     font-size: medium;
+    color: white;
+}
+
+.small-text {
+    font-size: small;
+    color: white;
+}
+
+.red-text {
+    font-size: medium;
+    color: #e96478;
+    margin-top: 1em !important;
+    margin-bottom: 1em;
+
 }
 
 .green-dot {
@@ -34,7 +48,7 @@ body {
     background-color: #4d455d;
     border-radius: 20px;
     margin: auto;
-    margin-top: 4em;
+    margin-top: 3em;
     width: 320px;
     padding: 1.5em;
 }
@@ -45,4 +59,24 @@ body {
 
 .rounded {
     border-radius: 20px;
+}
+
+a:link {
+    color: #e96478;
+    font-size: medium;
+}
+  
+a:visited {
+    color: #e96478;
+    font-size: medium;
+}
+  
+a:hover {
+    color: #f1919e;
+    font-size: medium;
+}
+  
+a:active {
+    color: #f1919e;
+    font-size: medium;
 }

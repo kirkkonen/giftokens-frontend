@@ -21,7 +21,11 @@
     <h2 class="h2">Create a giftoken</h2>
 
     <app-image-generator (prompted) = "prompted($event)"></app-image-generator>  
-    <p *ngIf="prompt$ | async as prompt"> Generating image for the request {{prompt}}... </p>
+    <p 
+      *ngIf="prompt$ | async as prompt"
+      class="red-text"> 
+      Generating image for the request {{prompt}}... 
+    </p>
     <app-gallery [images] = "$any(images$ | async)"></app-gallery>  
     
     <br>
@@ -30,7 +34,7 @@
     <form [formGroup]="form" (ngSubmit)="mintNFT()">
   
       <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Receiver address</mat-label>
+          <mat-label>Giftee address</mat-label>
           <input 
           matInput 
           [formControl]="form.controls.prompt" 
@@ -44,7 +48,7 @@
           mat-raised-button color="accent"
           class="full-width"
           type="submit">
-          Create Giftoken
+          Mint Giftoken
       </button>
       </div>
   

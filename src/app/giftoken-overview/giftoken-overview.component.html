@@ -1,84 +1,99 @@
-<div class="toolbar" role="banner">
-  <h1>Giftoken #{{tokenID}}</h1>
-</div>
 
-<div *ngIf="(displayedAccount | async); else displayButton; let account"> 
-    
+<mat-toolbar color="primary">
+  <img src="../../assets/logo.png" class="logo">
+  <h1>Giftokens</h1>
+  <span class="spacer"></span>
+  <span class="mid-text" *ngIf="(displayedAccount | async); else displayButton; let account"> 
+    <span class="green-dot">●</span>  
     {{account}} 
-    
-    <br>
-    <br>
-    <img [src]="nftImage">
-    <br>
-    <br>
+  </span>
+  <ng-template #displayButton>
+    <button 
+    mat-raised-button color="accent"
+    (click)= "openMetaMask()">
+      Connect Wallet
+    </button>
+  </ng-template>
+</mat-toolbar>
 
-    <p *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Congratulations! This Giftoken is for you :)</p>
+<div class="widget">
+  <h2 class="h2">Giftoken #{{tokenID}}</h2>
+  <br>
+  <img [src]="nftImage" class="full-width rounded">
+  <br>
+  <br>
+  <p 
+    class="mid-text"
+    *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Congratulations! This Giftoken is for you :)
+  </p>
 
-    <ng-template #notBeneficiaryGiftee>
-      <p>Giftee: 
-        <a [href]="'https://goerli.etherscan.io/address/' + beneficiaryString"
-        target="blank">
-          {{shortBeneficiary | async}}
-        </a>
-      </p>
-    </ng-template>
-
-    <p>Contract: 
-      <a [href]="'https://goerli.etherscan.io/address/' + contractAddress"
+  <ng-template #notBeneficiaryGiftee>
+    <p class="mid-text">Giftee: 
+      <a [href]="'https://goerli.etherscan.io/address/' + beneficiaryString"
       target="blank">
-        {{shortAddress}}
+        {{shortBeneficiary | async}}
       </a>
     </p>
+  </ng-template>
 
-    <br>
-    <p>Сontributors:</p>
-    <li *ngFor="let contribution of contributions">
-      <a 
-      [href]="'https://goerli.etherscan.io/address/' + contribution.contributor"
-      target="blank"> 
-        {{contribution.shortContributor}}</a> added {{contribution.contribution}} ETH
-    </li>
-    <br>
+  <!-- <p class="small-text">Contract: 
+    <a [href]="'https://goerli.etherscan.io/address/' + contractAddress"
+    target="blank">
+      {{shortAddress}}
+    </a>
+  </p> -->
 
-    <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
+  <br>
+  <p class="mid-text">Сontributors:</p>
+  <li *ngFor="let contribution of contributions">
+    <a 
+    [href]="'https://goerli.etherscan.io/address/' + contribution.contributor"
+    target="blank"> 
+      {{contribution.shortContributor}}</a> 
+      <span class="mid-text"> added {{contribution.contribution}} ETH</span> 
+  </li>
+  <br>
+
+  <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
+    <button
+    mat-raised-button color="accent"
+    class="full-width"
+    (click)="claimGifts()">
+    Claim gifts
+  </button>
+  </div>
+
+  <ng-template #notBeneficiaryAdd>
+    <!-- <p>Add your contribution:</p> -->
+    <form [formGroup]="form" (ngSubmit)="addFunds()">
+      <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Add your contribution</mat-label>
+          <input 
+          matInput 
+          [formControl]="form.controls.prompt" 
+          placeholder="100" 
+          #description
+          (keyup.enter)="addFunds()">
+      </mat-form-field>
+
+      <div mat-dialog-actions>
       <button
-      mat-raised-button color="primary"
-      (click)="claimGifts()">
-      Claim gifts
-    </button>
-    </div>
-    <br>
-    
-    <ng-template #notBeneficiaryAdd>
-      <p>Add your contribution:</p>
-      <form [formGroup]="form" (ngSubmit)="addFunds()">
-        <mat-form-field appearance="outline">
-            <mat-label>Amount to add</mat-label>
-            <input 
-            matInput 
-            [formControl]="form.controls.prompt" 
-            placeholder="100" 
-            #description
-            (keyup.enter)="addFunds()">
-        </mat-form-field>
-  
-        <div mat-dialog-actions>
-        <button
-            mat-raised-button color="primary"
-            type="submit">
-            Add tokens
-        </button>
-        </div>
-        <br>
-      </form>
-    </ng-template>
+          mat-raised-button color="accent"
+          class="full-width"
+          type="submit">
+          Add tokens
+      </button>
+      </div>
+    </form>
+  </ng-template>
 
 </div>
 
-<ng-template #displayButton>
+
+<!-- <ng-template #displayButton>
   <button (click)= "openMetaMask()">
     Connect Wallet
   </button>
-</ng-template>
+</ng-template> -->
 
 

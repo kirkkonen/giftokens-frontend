@@ -90,7 +90,7 @@ export class GiftokenOverviewComponent implements OnInit {
 
     let _beneficiary = await this.web3.getBeneficiary(this.tokenID)
     this.beneficiaryString = _beneficiary
-    let _shortBeneficiary = _beneficiary.slice(0,4).concat('...', _beneficiary.slice(-4))
+    let _shortBeneficiary = _beneficiary.slice(0,8).concat('...', _beneficiary.slice(-8))
     this.beneficiary.next(_beneficiary)
     this.shortBeneficiary.next(_shortBeneficiary)
     console.log('beneficiary in overview component: ', this.beneficiary)
