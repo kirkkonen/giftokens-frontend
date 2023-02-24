@@ -1,7 +1,7 @@
 <br>
   <form [formGroup]="form" (ngSubmit)="generateImage()"> 
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill" class="full-width">
         <mat-label>Image description</mat-label>
         <input 
         matInput 
@@ -14,22 +14,11 @@
     <div mat-dialog-actions>
     <button
         mat-raised-button color="accent"
+        class="full-width"
         type="submit">
         Generate image
     </button>
     </div>
 
 </form>
-
-
-<!-- old field
-<input matInput class="formControl" [formControl]="imageFormControl" placeholder="White cat with a red hat" #description> -->
-
-<!-- another option to handle errors -->
-<!-- <mat-error *ngIf="form.controls['name'].errors?.['minlength']"> -->
-    <!-- <mat-error *ngIf="imageFormControl.hasError('required')"> -->
-
-
-<!-- disabled button -->
-<!-- <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button> -->
 

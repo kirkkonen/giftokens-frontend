@@ -1,7 +1,3 @@
-<!-- <div class="toolbar" role="banner">
-    <h1>Create a giftoken</h1>
-</div> -->
-
 <mat-toolbar color="primary">
   <img src="../../assets/logo.png" class="logo">
   <h1>Giftokens</h1>
@@ -17,28 +13,23 @@
       Connect Wallet
     </button>
   </ng-template>
-
 </mat-toolbar>
   
 
   
-  <div>
-    <app-image-generator (prompted) = "prompted($event)"></app-image-generator>
-  
-    <br>
-  
+  <div class="widget">
+    <h2 class="h2">Create a giftoken</h2>
+
+    <app-image-generator (prompted) = "prompted($event)"></app-image-generator>  
     <p *ngIf="prompt$ | async as prompt"> Generating image for the request {{prompt}}... </p>
-  
-    <app-gallery [images] = "$any(images$ | async)"></app-gallery>
+    <app-gallery [images] = "$any(images$ | async)"></app-gallery>  
     
     <br>
-
-  
     <br>
-  
+    
     <form [formGroup]="form" (ngSubmit)="mintNFT()">
   
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill" class="full-width">
           <mat-label>Receiver address</mat-label>
           <input 
           matInput 
@@ -51,6 +42,7 @@
       <div mat-dialog-actions>
       <button
           mat-raised-button color="accent"
+          class="full-width"
           type="submit">
           Create Giftoken
       </button>
@@ -62,6 +54,4 @@
       Giftoken was minted successfully! Please proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview</a>  
     </p>
 
-  <!-- 
-    <app-contract-caller></app-contract-caller> -->
   </div>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 // import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ImageGeneratorComponent implements OnInit {
   @Output() public readonly prompted = new EventEmitter<string>()
 
   public readonly form = new FormGroup({
-    prompt: new FormControl<string | null>(null, [Validators.required])
+    prompt: new FormControl<string | null>(null)
   })
 
   public generateImage(): void {

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Web3Service } from '../services/web3.service';
 import { Subject, ReplaySubject, BehaviorSubject, switchMap, of, tap, Observable, shareReplay, take, map, from, catchError } from 'rxjs';
 import { ImageGenerationService } from '../services/image-generation.service';
@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
   constructor(private web3: Web3Service) { 
   }
 
-  title = 'web3gifts';
+  title = 'Giftokens';
   ngOnInit() {
     this.checkAccounts();
   }
@@ -55,7 +55,7 @@ export class MainComponent implements OnInit {
   )
 
   public readonly form = new FormGroup({
-    prompt: new FormControl<string | null>(null, [Validators.required])
+    prompt: new FormControl<string | null>(null)
   })
 
   public mintNFT(): void {
