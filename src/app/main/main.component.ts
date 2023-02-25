@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Web3Service } from '../services/web3.service';
 import { Subject, ReplaySubject, BehaviorSubject, switchMap, of, tap, Observable, shareReplay, take, map, from, catchError } from 'rxjs';
 import { ImageGenerationService } from '../services/image-generation.service';
@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MainComponent implements OnInit {
 
+  isLoading: boolean
   tokenID: Subject<string> = new ReplaySubject(1);
   displayedAccount: Subject<string> = new ReplaySubject(1);
 
@@ -25,13 +26,22 @@ export class MainComponent implements OnInit {
     this.displayedAccount.next(_displayedAccount)
   }
 
+  showProgressBar() {
+    this.isLoading = true
+    setTimeout(()=> {
+    this.isLoading = false;
+    }, 100000)
+  }
+
 
   constructor(private web3: Web3Service) { 
   }
 
   title = 'Giftokens';
   ngOnInit() {
+    this.isLoading = false
     this.checkAccounts();
+    console.log('is loading? ', this.isLoading)
   }
 
   private readonly httpClient = inject(HttpClient)
@@ -55,10 +65,11 @@ export class MainComponent implements OnInit {
   )
 
   public readonly form = new FormGroup({
-    prompt: new FormControl<string | null>(null)
+    prompt: new FormControl<string | null>(null, Validators.required)
   })
 
   public mintNFT(): void {
+    this.showProgressBar()
     console.log('nft min button clicked')
     if (this.form.valid && this.form.value.prompt) {
       // this.web3.mintNFT(this.form.value.prompt, 'smth')

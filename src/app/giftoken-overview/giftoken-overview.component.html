@@ -10,7 +10,8 @@
   <ng-template #displayButton>
     <button 
     mat-raised-button color="accent"
-    (click)= "openMetaMask()">
+    (click)= "openMetaMask()"
+    class="button">
       Connect Wallet
     </button>
   </ng-template>
@@ -23,12 +24,13 @@
   <br>
   <br>
   <p 
-    class="mid-text"
-    *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Congratulations! This Giftoken is for you :)
+    class="mid-text center inner-widget"
+    *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Wow, this Giftoken is for you!
   </p>
 
   <ng-template #notBeneficiaryGiftee>
-    <p class="mid-text">Giftee: 
+    <p class="mid-text center inner-widget">
+      Giftee: 
       <a [href]="'https://goerli.etherscan.io/address/' + beneficiaryString"
       target="blank">
         {{shortBeneficiary | async}}
@@ -44,24 +46,38 @@
   </p> -->
 
   <br>
-  <p class="mid-text">Сontributors:</p>
-  <li *ngFor="let contribution of contributions">
-    <a 
-    [href]="'https://goerli.etherscan.io/address/' + contribution.contributor"
-    target="blank"> 
-      {{contribution.shortContributor}}</a> 
-      <span class="mid-text"> added {{contribution.contribution}} ETH</span> 
-  </li>
-  <br>
+  <p 
+    *ngIf="!contributions?.length else notEmpty"
+    class="mid-text center">
+    There are no contributions yet
+  </p>
 
-  <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
-    <button
-    mat-raised-button color="accent"
-    class="full-width"
-    (click)="claimGifts()">
-    Claim gifts
-  </button>
-  </div>
+  <ng-template #notEmpty>
+    <p class="mid-text">Сontributors:</p>
+    <ul>
+      <li *ngFor="let contribution of contributions">
+        <span class="contribution">
+          <a 
+          [href]="'https://goerli.etherscan.io/address/' + contribution.contributor"
+          target="blank"> 
+            {{contribution.shortContributor}}</a> 
+            <span class="mid-text">{{contribution.contribution}} ETH</span> 
+        </span>
+      </li>
+    </ul>
+
+    <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
+      <button
+      mat-raised-button color="accent"
+      class="full-width button"
+      (click)="claimGifts()">
+      Claim gifts
+    </button>
+    </div>
+
+  </ng-template>
+
+
 
   <ng-template #notBeneficiaryAdd>
     <!-- <p>Add your contribution:</p> -->
@@ -76,24 +92,15 @@
           (keyup.enter)="addFunds()">
       </mat-form-field>
 
-      <div mat-dialog-actions>
       <button
           mat-raised-button color="accent"
-          class="full-width"
-          type="submit">
+          class="full-width button"
+          type="submit"
+          [disabled]="!form.valid">
           Add tokens
       </button>
-      </div>
+
     </form>
   </ng-template>
 
 </div>
-
-
-<!-- <ng-template #displayButton>
-  <button (click)= "openMetaMask()">
-    Connect Wallet
-  </button>
-</ng-template> -->
-
-

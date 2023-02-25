@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -38,6 +39,7 @@ import { OverviewGalleryComponent } from './overview-gallery/overview-gallery.co
     MatTableModule,
     MatToolbarModule,
     MatButtonModule,
+    MatProgressBarModule,
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule

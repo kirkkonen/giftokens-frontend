@@ -11,14 +11,13 @@
         (keyup.enter)="generateImage()">
     </mat-form-field>
     
-    <div mat-dialog-actions>
     <button
         mat-raised-button color="accent"
-        class="full-width"
-        type="submit">
+        class="full-width button"
+        type="submit"
+        [disabled]="!form.valid">
         Generate image
     </button>
-    </div>
 
 </form>
 

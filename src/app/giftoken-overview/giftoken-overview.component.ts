@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Web3Service } from '../services/web3.service';
 import { Observable, ReplaySubject, Subject, combineLatest, map, of, shareReplay, switchMap, tap, throwIfEmpty } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contribution } from '../models/contribution';
 import { contractAddress } from '../../abis.js'
 
@@ -12,6 +12,7 @@ import { contractAddress } from '../../abis.js'
   templateUrl: './giftoken-overview.component.html',
   styleUrls: ['./giftoken-overview.component.scss']
 })
+
 export class GiftokenOverviewComponent implements OnInit {
 
   contractAddress: string = contractAddress
@@ -48,7 +49,7 @@ export class GiftokenOverviewComponent implements OnInit {
   }
 
   public readonly form = new FormGroup({
-    prompt: new FormControl<string | null>(null)
+    prompt: new FormControl<string | null>(null, Validators.required)
   })
 
   constructor(
@@ -90,7 +91,7 @@ export class GiftokenOverviewComponent implements OnInit {
 
     let _beneficiary = await this.web3.getBeneficiary(this.tokenID)
     this.beneficiaryString = _beneficiary
-    let _shortBeneficiary = _beneficiary.slice(0,8).concat('...', _beneficiary.slice(-8))
+    let _shortBeneficiary = _beneficiary.slice(0,6).concat('...', _beneficiary.slice(-6))
     this.beneficiary.next(_beneficiary)
     this.shortBeneficiary.next(_shortBeneficiary)
     console.log('beneficiary in overview component: ', this.beneficiary)

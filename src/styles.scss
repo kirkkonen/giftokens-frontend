@@ -7,6 +7,14 @@ body {
     background-color: #F5E9CF;
 }
 
+.button:hover {
+    background-color: #afd4d3 !important;
+}
+
+.button:disabled {
+    background-color: #A2ABAB !important;
+}
+
 .logo {
     width: 2em;
     height:auto;
@@ -40,6 +48,17 @@ body {
 
 }
 
+.inner-widget {
+    background-color: #6d647e;
+    border-radius: 12px;
+    padding: 0.5em;   
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
 .green-dot {
     color: #7DB9B6
 }
@@ -61,22 +80,38 @@ body {
     border-radius: 20px;
 }
 
+.contribution {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 0.5em;
+}
+
+ul {
+    list-style-type:none;
+    padding-left:0;
+}
+
 a:link {
     color: #e96478;
     font-size: medium;
+    text-decoration: none;
 }
   
 a:visited {
     color: #e96478;
     font-size: medium;
+    text-decoration: none;
 }
   
 a:hover {
     color: #f1919e;
     font-size: medium;
+    text-decoration: none;
 }
   
 a:active {
     color: #f1919e;
     font-size: medium;
+    text-decoration: none;
 }

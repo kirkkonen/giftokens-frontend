@@ -9,15 +9,21 @@
   <ng-template #displayButton>
     <button 
     mat-raised-button color="accent"
-    (click)= "openMetaMask()">
+    (click)= "openMetaMask()"
+    class="button">
       Connect Wallet
     </button>
   </ng-template>
 </mat-toolbar>
   
 
+
   
   <div class="widget">
+
+
+
+
     <h2 class="h2">Create a giftoken</h2>
 
     <app-image-generator (prompted) = "prompted($event)"></app-image-generator>  
@@ -43,19 +49,24 @@
           (keyup.enter)="mintNFT()">
       </mat-form-field>
       
-      <div mat-dialog-actions>
       <button
           mat-raised-button color="accent"
-          class="full-width"
-          type="submit">
+          class="full-width button"
+          type="submit"
+          [disabled]="!form.valid">
           Mint Giftoken
       </button>
-      </div>
-  
+
+      <mat-progress-bar
+          *ngIf="isLoading"  
+          color="accent" 
+          mode="buffer">
+      </mat-progress-bar>  
     </form>
   
-    <p *ngIf="tokenID | async">
-      Giftoken was minted successfully! Please proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview</a>  
+    <p *ngIf="tokenID | async"
+    class="mid-text center">
+      Giftoken was minted successfully! Proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview. Uploading image to IPFS might take up to a few minutes.</a>  
     </p>
 
   </div>
