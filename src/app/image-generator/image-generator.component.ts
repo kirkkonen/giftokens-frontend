@@ -11,6 +11,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class ImageGeneratorComponent implements OnInit {
 
+  isLoading: boolean
+  showProgressBar() {
+    this.isLoading = true
+    setTimeout(()=> {
+    this.isLoading = false;
+    }, 7000)
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +31,8 @@ export class ImageGeneratorComponent implements OnInit {
   })
 
   public generateImage(): void {
+
+    this.showProgressBar()
 
     if (this.form.valid && this.form.value.prompt) {
       this.prompted.emit(this.form.value.prompt)

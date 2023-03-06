@@ -19,8 +19,6 @@ export class Web3Service {
     constructor() { 
     }
 
-    
-
     public getAccounts = async () => {
         try {
             return await window.ethereum.request({ method: 'eth_accounts' });
@@ -49,7 +47,7 @@ export class Web3Service {
         let accountArray = await this.getAccounts()
 
         this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
-        let tokenID = Math.floor(Math.random() * 1000000)
+        let tokenID = Math.floor(Math.random() * 10000000);
 
         const mint = await this._contract
           .methods.mint(
@@ -86,7 +84,7 @@ export class Web3Service {
 
         this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
         const payment = await this._contract
-            .methods.acceptPayment(tokenId)
+            .methods.acceptNativePayment(tokenId)
             .send({ from: accountArray[0], value: updatedAmount })
         
         return payment
@@ -113,7 +111,7 @@ export class Web3Service {
 
         this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
         const contribution = await this._contract
-            .methods.getContributorsBalance(id, contributor)
+            .methods.getContributorsNativeBalance(id, contributor)
             .call({ from: accountArray[0] })
         
         return contribution
@@ -145,17 +143,17 @@ export class Web3Service {
 
     }
 
-    public async getBalance(id): Promise<string> {
+    public async getNativeBalance(id): Promise<string> {
 
         this._provider = window.ethereum
         this._web3js = new Web3(this._provider)
         let accountArray = await this.getAccounts()
 
         this._contract = new this._web3js.eth.Contract(_contractAbi, this._contractAddress)
-        const beneficiary = await this._contract
-            .methods.getBeneficiary(id)
+        const nativeBalance = await this._contract
+            .methods.getTokenBalance(id)
             .call({ from: accountArray[0] })    
-        return beneficiary
+        return nativeBalance
     }
     
 }

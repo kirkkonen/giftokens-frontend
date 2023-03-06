@@ -17,21 +17,16 @@
 </mat-toolbar>
   
 
-
-  
-  <div class="widget">
-
-
-
+<div class="widget">
 
     <h2 class="h2">Create a giftoken</h2>
 
     <app-image-generator (prompted) = "prompted($event)"></app-image-generator>  
-    <p 
+    <!-- <p 
       *ngIf="prompt$ | async as prompt"
       class="red-text"> 
       Generating image for the request {{prompt}}... 
-    </p>
+    </p> -->
     <app-gallery [images] = "$any(images$ | async)"></app-gallery>  
     
     <br>
@@ -64,9 +59,12 @@
       </mat-progress-bar>  
     </form>
   
-    <p *ngIf="tokenID | async"
-    class="mid-text center">
-      Giftoken was minted successfully! Proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview. Uploading image to IPFS might take up to a few minutes.</a>  
-    </p>
-
-  </div>
+    <div *ngIf="tokenID | async">
+      <br>
+      <p class="mid-text center">
+        Giftoken was minted successfully! Proceed to its <a href="localhost:4200/tokens/{{tokenID | async}}">overview. </a>
+        Uploading image to IPFS might take up to a few minutes.  
+      </p>
+    </div>
+    
+</div>

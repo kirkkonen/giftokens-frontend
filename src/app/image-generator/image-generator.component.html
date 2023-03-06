@@ -19,5 +19,11 @@
         Generate image
     </button>
 
+    <mat-progress-bar
+        *ngIf="isLoading"  
+        color="accent" 
+        mode="buffer">
+    </mat-progress-bar>  
+
 </form>
 

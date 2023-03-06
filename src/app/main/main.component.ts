@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
     this.isLoading = true
     setTimeout(()=> {
     this.isLoading = false;
-    }, 100000)
+    }, 40000)
   }
 
 
