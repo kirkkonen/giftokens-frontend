@@ -26,6 +26,8 @@
   <p 
     class="mid-text center inner-widget"
     *ngIf="isBeneficiary | async else notBeneficiaryGiftee">Wow, this Giftoken is for you!
+
+    
   </p>
 
   <ng-template #notBeneficiaryGiftee>
@@ -46,6 +48,7 @@
   </p> -->
 
   <br>
+  
   <p 
     *ngIf="!contributions?.length else notEmpty"
     class="mid-text center">
@@ -66,17 +69,17 @@
       </li>
     </ul>
 
-    <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
-      <button
+  </ng-template>
+
+
+  <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
+    <button
       mat-raised-button color="accent"
       class="full-width button"
       (click)="claimGifts()">
       Claim gifts
     </button>
-    </div>
-
-  </ng-template>
-
+  </div>
 
 
   <ng-template #notBeneficiaryAdd>
