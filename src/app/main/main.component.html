@@ -22,11 +22,7 @@
     <h2 class="h2">Create a giftoken</h2>
 
     <app-image-generator (prompted) = "prompted($event)"></app-image-generator>  
-    <!-- <p 
-      *ngIf="prompt$ | async as prompt"
-      class="red-text"> 
-      Generating image for the request {{prompt}}... 
-    </p> -->
+
     <app-gallery [images] = "$any(images$ | async)"></app-gallery>  
     
     <br>

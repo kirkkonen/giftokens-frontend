@@ -143,7 +143,7 @@ export class Web3Service {
 
     }
 
-    public async getNativeBalance(id): Promise<string> {
+    public async getNativeBalance(id) {
 
         this._provider = window.ethereum
         this._web3js = new Web3(this._provider)

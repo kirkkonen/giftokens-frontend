@@ -30,6 +30,8 @@ export class GiftokenOverviewComponent implements OnInit {
     map(([beneficiary, account]) => beneficiary.toLowerCase() === account.toLowerCase())
   )
   contributions: Contribution[] = []
+  isNativeBalanceEmpty: boolean = true
+  isTokenBalanceEmpty: boolean = true
 
 
   async checkAccounts(){
@@ -96,6 +98,17 @@ export class GiftokenOverviewComponent implements OnInit {
     this.shortBeneficiary.next(_shortBeneficiary)
     console.log('beneficiary in overview component: ', this.beneficiary)
     console.log('connected account in ovewview component: ', this.connectedAccount)
+
+    this.web3.getNativeBalance(this.tokenID)
+      .then((value) => {
+        console.log('native balance: ', value)
+        if(value == 0) {
+          this.isNativeBalanceEmpty = true
+        } else {
+          this.isNativeBalanceEmpty = false
+        }
+        console.log('isNativeBalanceEmpty: ', this.isNativeBalanceEmpty)
+    })
 
   }
 

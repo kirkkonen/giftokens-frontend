@@ -71,11 +71,11 @@
 
   </ng-template>
 
-
   <div *ngIf="isBeneficiary | async else notBeneficiaryAdd">
     <button
       mat-raised-button color="accent"
       class="full-width button"
+      [disabled]="isNativeBalanceEmpty"
       (click)="claimGifts()">
       Claim gifts
     </button>
@@ -83,7 +83,6 @@
 
 
   <ng-template #notBeneficiaryAdd>
-    <!-- <p>Add your contribution:</p> -->
     <form [formGroup]="form" (ngSubmit)="addFunds()">
       <mat-form-field appearance="fill" class="full-width">
           <mat-label>Add your contribution</mat-label>
