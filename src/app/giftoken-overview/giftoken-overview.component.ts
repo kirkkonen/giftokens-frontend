@@ -32,7 +32,14 @@ export class GiftokenOverviewComponent implements OnInit {
   contributions: Contribution[] = []
   isNativeBalanceEmpty: boolean = true
   isTokenBalanceEmpty: boolean = true
+  isLoading: boolean = false
 
+  showProgressBar() {
+    this.isLoading = true
+    setTimeout(()=> {
+    this.isLoading = false;
+    }, 20000)
+  }
 
   async checkAccounts(){
     let addresses = await this.web3.getAccounts()
@@ -113,15 +120,21 @@ export class GiftokenOverviewComponent implements OnInit {
   }
 
   async addFunds() {
+    this.showProgressBar()
     if (this.form.valid && this.form.value.prompt) {
-      this.web3.addFunds(this.form.value.prompt, this.tokenID)
+      await this.web3.addFunds(this.form.value.prompt, this.tokenID)
       console.log('amount sent: ', this.form.value.prompt)
     }
+    this.contributors = await this.web3.getContributors(this.tokenID)
+    console.log('contributors after adding funds: ', this.contributors)
   }
 
   async claimGifts() {
+    this.showProgressBar()
     await this.web3.claimGifts(this.tokenID)
     console.log('gift claimed')
+    this.isNativeBalanceEmpty = true
+    console.log('is native balance empty after claim: ', this.isNativeBalanceEmpty)
   }
 
 }

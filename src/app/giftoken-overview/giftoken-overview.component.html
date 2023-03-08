@@ -79,6 +79,13 @@
       (click)="claimGifts()">
       Claim gifts
     </button>
+
+    <mat-progress-bar
+      *ngIf="isLoading"  
+      color="accent" 
+      mode="buffer">
+    </mat-progress-bar>   
+
   </div>
 
 
@@ -101,6 +108,12 @@
           [disabled]="!form.valid">
           Add tokens
       </button>
+
+      <mat-progress-bar
+        *ngIf="isLoading"  
+        color="accent" 
+        mode="buffer">
+      </mat-progress-bar>   
 
     </form>
   </ng-template>
