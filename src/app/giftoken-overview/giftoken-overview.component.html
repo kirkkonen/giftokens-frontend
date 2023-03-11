@@ -95,7 +95,7 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Select token</mat-label>
         <mat-select>
-          <mat-option *ngFor="let token of accountTokensArray | async" [value]="token">{{ token }}</mat-option>
+          <mat-option *ngFor="let token of accountTokensArray" [value]="token">{{token}}</mat-option>
         </mat-select>
       </mat-form-field>
 
