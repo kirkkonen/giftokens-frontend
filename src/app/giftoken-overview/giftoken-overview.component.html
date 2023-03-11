@@ -91,6 +91,14 @@
 
   <ng-template #notBeneficiaryAdd>
     <form [formGroup]="form" (ngSubmit)="addFunds()">
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Select token</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let token of accountTokensArray | async" [value]="token">{{ token }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <mat-form-field appearance="fill" class="full-width">
           <mat-label>Add your contribution</mat-label>
           <input 

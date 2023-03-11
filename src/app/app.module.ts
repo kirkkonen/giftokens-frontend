@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -36,6 +37,7 @@ import { OverviewGalleryComponent } from './overview-gallery/overview-gallery.co
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatSelectModule,
     MatTableModule,
     MatToolbarModule,
     MatButtonModule,

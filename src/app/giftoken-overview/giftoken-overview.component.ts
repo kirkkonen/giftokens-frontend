@@ -26,6 +26,8 @@ export class GiftokenOverviewComponent implements OnInit {
   shortBeneficiary: Subject<string> = new ReplaySubject(1)
   beneficiaryString: string
   connectedAccount: Subject<string> = new ReplaySubject(1)
+  accountTokens: any
+  accountTokensArray: any
   isBeneficiary: Observable<boolean> = combineLatest([this.beneficiary, this.connectedAccount]).pipe(
     map(([beneficiary, account]) => beneficiary.toLowerCase() === account.toLowerCase())
   )
@@ -50,6 +52,12 @@ export class GiftokenOverviewComponent implements OnInit {
     console.log("account from checkAccounts: ", _displayedAccount)
     this.displayedAccount.next(_displayedAccount)
     this.connectedAccount.next(addresses[0])
+
+    this.http.get(`http://localhost:3000/api/tokens?address=${addresses[0]}`).subscribe((response) => {
+      this.accountTokens = response
+      this.accountTokensArray = this.accountTokens.tokenAddressArray
+      console.log('tokens array: ', this.accountTokensArray)
+    })
   }
 
   async openMetaMask(){
@@ -76,6 +84,11 @@ export class GiftokenOverviewComponent implements OnInit {
 
     console.log(tokenURI)
 
+    // public getImages(prompt: string, numberOfImages: number): Observable<string[]> {
+    //   console.log('arguments: ', prompt, numberOfImages)
+    //   return this.httpClient.get<string[]>(`http://localhost:3000/api/images?prompt=${prompt}&n=${numberOfImages}`)
+    // }
+    
     this.http.get(tokenURI).subscribe((response) => {
       this.nftMetadata = response;
       console.log('metadata: ', this.nftMetadata)
