@@ -27,7 +27,8 @@ export class GiftokenOverviewComponent implements OnInit {
   beneficiaryString: string
   connectedAccount: Subject<string> = new ReplaySubject(1)
   accountTokens: any
-  accountTokensArray: any
+  accountTokenStringArray: String[]
+  accountTokenAddressArray: String[]
   isBeneficiary: Observable<boolean> = combineLatest([this.beneficiary, this.connectedAccount]).pipe(
     map(([beneficiary, account]) => beneficiary.toLowerCase() === account.toLowerCase())
   )
@@ -55,8 +56,22 @@ export class GiftokenOverviewComponent implements OnInit {
 
     this.http.get(`http://localhost:3000/api/tokens?address=${addresses[0]}`).subscribe((response) => {
       this.accountTokens = response
-      this.accountTokensArray = this.accountTokens.tokenAddressArray
-      console.log('tokens array: ', this.accountTokensArray)
+      var localTokensArray = this.accountTokens.tokensArray
+
+      console.log( 'local tokens array', localTokensArray)
+
+      // var localAddressArray = []
+      var localReadableStringArray = []
+
+      localTokensArray.forEach(element => {
+        // localAddressArray.push(element.address)
+        localReadableStringArray.push(element.readableString)
+        //this.accountTokenStringArray.push(element.readableString)
+      })
+
+      // this.accountTokenAddressArray = localAddressArray
+      this.accountTokenStringArray = localReadableStringArray
+
     })
   }
 
@@ -135,11 +150,14 @@ export class GiftokenOverviewComponent implements OnInit {
   async addFunds() {
     this.showProgressBar()
     if (this.form.valid && this.form.value.prompt) {
-      await this.web3.addFunds(this.form.value.prompt, this.tokenID)
-      console.log('amount sent: ', this.form.value.prompt)
+
+      console.log('form prompt: ', this.form.value.prompt)
+
+      // await this.web3.addFunds(this.form.value.prompt, this.tokenID)
+      // console.log('amount sent: ', this.form.value.prompt)
     }
-    this.contributors = await this.web3.getContributors(this.tokenID)
-    console.log('contributors after adding funds: ', this.contributors)
+    // this.contributors = await this.web3.getContributors(this.tokenID)
+    // console.log('contributors after adding funds: ', this.contributors)
   }
 
   async claimGifts() {

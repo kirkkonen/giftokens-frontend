@@ -93,14 +93,14 @@
     <form [formGroup]="form" (ngSubmit)="addFunds()">
 
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Select token</mat-label>
+        <mat-label>Select currency</mat-label>
         <mat-select>
-          <mat-option *ngFor="let token of accountTokensArray" [value]="token">{{token}}</mat-option>
+          <mat-option *ngFor="let token of accountTokenStringArray" [value]="token">{{token}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Add your contribution</mat-label>
+          <mat-label>How much would you contribute</mat-label>
           <input 
           matInput 
           [formControl]="form.controls.prompt" 
@@ -127,3 +127,5 @@
   </ng-template>
 
 </div>
+
+<div class="bottom-spacer"></div>
